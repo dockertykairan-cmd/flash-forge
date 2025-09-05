@@ -44,9 +44,17 @@ function renderDeckEditor() {
     const uploader = node.querySelector(".image-uploader");
     const fileInput = node.querySelector(".file-input");
     const preview = node.querySelector("img.preview");
-    front.value = card.front; back.value = card.back;
-    if (card.imageDataUrl) { preview.src = card.imageDataUrl; preview.classList.remove("hidden"); uploader.removeAttribute("data-empty"); }
     const imageActions = node.querySelector(".image-actions");
+    
+    front.value = card.front; back.value = card.back;
+    
+    if (card.imageDataUrl) { 
+      preview.src = card.imageDataUrl; 
+      preview.classList.remove("hidden"); 
+      imageActions.classList.remove("hidden");
+      uploader.removeAttribute("data-empty"); 
+    }
+    
     function onFile(file) {
       if (!file || !file.type.startsWith("image/")) return;
       const reader = new FileReader();
@@ -60,9 +68,13 @@ function renderDeckEditor() {
       };
       reader.readAsDataURL(file);
     }
+    
     uploader.onclick = () => fileInput.click();
     fileInput.onchange = e => onFile(e.target.files[0]);
-    node.querySelector(".replace").onclick = () => fileInput.click();
+    node.querySelector(".replace").onclick = (e) => {
+      e.stopPropagation();
+      fileInput.click();
+    };
     node.querySelector(".remove").onclick = () => {
       card.imageDataUrl = "";
       preview.src = "";
@@ -71,9 +83,17 @@ function renderDeckEditor() {
       uploader.setAttribute("data-empty", "Drop image here or click");
       save();
     };
+    
     front.oninput = () => { card.front = front.value; save(); };
     back.oninput = () => { card.back = back.value; save(); };
-    node.querySelector(".delete").onclick = () => { deck.cards = deck.cards.filter(c => c.id !== card.id); save(); updateView(); };
+    node.querySelector(".delete").onclick = () => { 
+      if (confirm('Are you sure you want to delete this card?')) {
+        deck.cards = deck.cards.filter(c => c.id !== card.id); 
+        save(); 
+        updateView(); 
+      }
+    };
+    
     list.appendChild(node);
   });
 }

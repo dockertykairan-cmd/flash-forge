@@ -118,20 +118,20 @@
       <div class="card-fields">
         <input class="input front" placeholder="Front (question/prompt)" />
         <textarea class="input back" placeholder="Back (answer/details)"></textarea>
+        <div class="image-uploader" data-empty="Drop image here or click">
+          <input type="file" accept="image/*" class="file-input" />
+          <img class="preview hidden" alt="" />
           <div class="image-actions hidden">
-      <div class="image-uploader" data-empty="Drop image here or click">
-        <input type="file" accept="image/*" class="file-input" />
-        <img class="preview hidden" alt="" />
-        <div class="image-actions">
-          <button class="btn small replace">Replace</button>
-          <button class="btn small danger delete">
-            <span>🗑️</span>
-            Delete Card
-          </button>
+            <button class="btn small replace">Replace</button>
+            <button class="btn small danger remove">Remove Image</button>
+          </div>
         </div>
       </div>
       <div class="card-actions">
-        <button class="btn small danger delete">🗑 Delete</button>
+        <button class="btn small danger delete">
+          <span>🗑️</span>
+          Delete Card
+        </button>
       </div>
     </div>
   </template>
