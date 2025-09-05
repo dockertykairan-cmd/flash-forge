@@ -46,14 +46,31 @@ function renderDeckEditor() {
     const preview = node.querySelector("img.preview");
     front.value = card.front; back.value = card.back;
     if (card.imageDataUrl) { preview.src = card.imageDataUrl; preview.classList.remove("hidden"); uploader.removeAttribute("data-empty"); }
+    const imageActions = node.querySelector(".image-actions");
     function onFile(file) {
       if (!file || !file.type.startsWith("image/")) return;
       const reader = new FileReader();
-      reader.onload = () => { card.imageDataUrl = reader.result; preview.src = card.imageDataUrl; preview.classList.remove("hidden"); uploader.removeAttribute("data-empty"); save(); };
+      reader.onload = () => { 
+        card.imageDataUrl = reader.result; 
+        preview.src = card.imageDataUrl; 
+        preview.classList.remove("hidden"); 
+        imageActions.classList.remove("hidden");
+        uploader.removeAttribute("data-empty"); 
+        save(); 
+      };
       reader.readAsDataURL(file);
     }
     uploader.onclick = () => fileInput.click();
     fileInput.onchange = e => onFile(e.target.files[0]);
+    node.querySelector(".replace").onclick = () => fileInput.click();
+    node.querySelector(".remove").onclick = () => {
+      card.imageDataUrl = "";
+      preview.src = "";
+      preview.classList.add("hidden");
+      imageActions.classList.add("hidden");
+      uploader.setAttribute("data-empty", "Drop image here or click");
+      save();
+    };
     front.oninput = () => { card.front = front.value; save(); };
     back.oninput = () => { card.back = back.value; save(); };
     node.querySelector(".delete").onclick = () => { deck.cards = deck.cards.filter(c => c.id !== card.id); save(); updateView(); };
@@ -74,7 +91,14 @@ function startStudy() {
 function renderStudyCard() {
   const deck = getSelectedDeck(); const card = deck.cards[session.order[session.index]];
   $("#studyFront").textContent = card.front; $("#studyBack").textContent = card.back;
-  const img = $("#studyImage"); if (card.imageDataUrl) { img.src = card.imageDataUrl; img.style.display="block"; } else { img.style.display="none"; }
+  const img = $("#studyImage"); 
+  const imgWrap = img.parentElement;
+  if (card.imageDataUrl) { 
+    img.src = card.imageDataUrl; 
+    imgWrap.style.display="block"; 
+  } else { 
+    imgWrap.style.display="none"; 
+  }
   $("#studyCard").classList.toggle("flipped", session.showBack);
   $("#progress").textContent = `Card ${session.index+1}/${session.order.length}`;
 }

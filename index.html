@@ -11,7 +11,10 @@
 </head>
 <body>
   <header class="topbar glass">
-    <h1>📚 Flashcards</h1>
+    <h1>
+      <span>📚</span>
+      Flashcards
+    </h1>
     <div class="toolbar">
       <button id="newDeckBtn" class="btn fab">＋</button>
       <button id="exportBtn" class="btn">Export</button>
@@ -24,20 +27,32 @@
 
   <main class="container">
     <aside class="sidebar glass">
-      <h2>Decks</h2>
+      <h2>
+        <span>📂</span>
+        My Decks
+      </h2>
       <ul id="deckList" class="deck-list"></ul>
     </aside>
 
     <section class="content">
-      <div id="emptyState" class="empty">✨ Create a deck to get started.</div>
+      <div id="emptyState" class="empty">
+        <div>Create your first deck to get started</div>
+        <p>Organize your study materials with custom flashcards</p>
+      </div>
 
       <div id="deckEditor" class="deck-editor hidden glass">
         <div class="deck-header">
           <input id="deckName" class="input deck-name" placeholder="Deck name" />
           <div class="deck-actions">
             <button id="addCardBtn" class="btn fab small">＋</button>
-            <button id="studyBtn" class="btn primary">▶ Study</button>
-            <button id="deleteDeckBtn" class="btn danger">🗑 Delete</button>
+            <button id="studyBtn" class="btn primary">
+              <span>▶️</span>
+              Study
+            </button>
+            <button id="deleteDeckBtn" class="btn danger">
+              <span>🗑️</span>
+              Delete
+            </button>
           </div>
         </div>
         <div id="cardList" class="card-list"></div>
@@ -45,9 +60,15 @@
 
       <div id="studyView" class="study hidden">
         <div class="study-header">
-          <button id="exitStudyBtn" class="btn">← Back</button>
+          <button id="exitStudyBtn" class="btn">
+            <span>←</span>
+            Back to Editor
+          </button>
           <div class="study-controls">
-            <button id="shuffleBtn" class="btn">🔀 Shuffle</button>
+            <button id="shuffleBtn" class="btn">
+              <span>🔀</span>
+              Shuffle
+            </button>
             <span id="progress" class="muted"></span>
           </div>
         </div>
@@ -65,11 +86,26 @@
         </div>
 
         <div class="study-actions">
-          <button id="prevBtn" class="btn">← Prev</button>
-          <button id="flipBtn" class="btn">🔄 Flip</button>
-          <button id="nextBtn" class="btn">Next →</button>
-          <button id="knownBtn" class="btn success">✅ Known (K)</button>
-          <button id="unknownBtn" class="btn warn">❓ Unknown (U)</button>
+          <button id="prevBtn" class="btn">
+            <span>←</span>
+            Previous
+          </button>
+          <button id="flipBtn" class="btn primary">
+            <span>🔄</span>
+            Flip Card
+          </button>
+          <button id="nextBtn" class="btn">
+            <span>→</span>
+            Next
+          </button>
+          <button id="knownBtn" class="btn success">
+            <span>✅</span>
+            I Know This
+          </button>
+          <button id="unknownBtn" class="btn warning">
+            <span>❓</span>
+            Need Practice
+          </button>
         </div>
 
         <div id="sessionStats" class="muted"></div>
@@ -82,13 +118,16 @@
       <div class="card-fields">
         <input class="input front" placeholder="Front (question/prompt)" />
         <textarea class="input back" placeholder="Back (answer/details)"></textarea>
-      </div>
+          <div class="image-actions hidden">
       <div class="image-uploader" data-empty="Drop image here or click">
         <input type="file" accept="image/*" class="file-input" />
         <img class="preview hidden" alt="" />
         <div class="image-actions">
           <button class="btn small replace">Replace</button>
-          <button class="btn small danger remove">Remove</button>
+          <button class="btn small danger delete">
+            <span>🗑️</span>
+            Delete Card
+          </button>
         </div>
       </div>
       <div class="card-actions">
