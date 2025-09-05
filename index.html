@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Flashcards + Images</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="topbar glass">
+    <h1>📚 Flashcards</h1>
+    <div class="toolbar">
+      <button id="newDeckBtn" class="btn fab">＋</button>
+      <button id="exportBtn" class="btn">Export</button>
+      <label class="file-btn">
+        Import
+        <input type="file" id="importInput" accept="application/json" hidden />
+      </label>
+    </div>
+  </header>
+
+  <main class="container">
+    <aside class="sidebar glass">
+      <h2>Decks</h2>
+      <ul id="deckList" class="deck-list"></ul>
+    </aside>
+
+    <section class="content">
+      <div id="emptyState" class="empty">✨ Create a deck to get started.</div>
+
+      <div id="deckEditor" class="deck-editor hidden glass">
+        <div class="deck-header">
+          <input id="deckName" class="input deck-name" placeholder="Deck name" />
+          <div class="deck-actions">
+            <button id="addCardBtn" class="btn fab small">＋</button>
+            <button id="studyBtn" class="btn primary">▶ Study</button>
+            <button id="deleteDeckBtn" class="btn danger">🗑 Delete</button>
+          </div>
+        </div>
+        <div id="cardList" class="card-list"></div>
+      </div>
+
+      <div id="studyView" class="study hidden">
+        <div class="study-header">
+          <button id="exitStudyBtn" class="btn">← Back</button>
+          <div class="study-controls">
+            <button id="shuffleBtn" class="btn">🔀 Shuffle</button>
+            <span id="progress" class="muted"></span>
+          </div>
+        </div>
+
+        <div id="studyCard" class="study-card flip" tabindex="0">
+          <div class="study-inner">
+            <div class="study-front">
+              <div class="study-image-wrap"><img id="studyImage" alt="" /></div>
+              <div id="studyFront" class="study-face"></div>
+            </div>
+            <div class="study-back">
+              <div id="studyBack" class="study-face"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="study-actions">
+          <button id="prevBtn" class="btn">← Prev</button>
+          <button id="flipBtn" class="btn">🔄 Flip</button>
+          <button id="nextBtn" class="btn">Next →</button>
+          <button id="knownBtn" class="btn success">✅ Known (K)</button>
+          <button id="unknownBtn" class="btn warn">❓ Unknown (U)</button>
+        </div>
+
+        <div id="sessionStats" class="muted"></div>
+      </div>
+    </section>
+  </main>
+
+  <template id="cardTemplate">
+    <div class="card glass">
+      <div class="card-fields">
+        <input class="input front" placeholder="Front (question/prompt)" />
+        <textarea class="input back" placeholder="Back (answer/details)"></textarea>
+      </div>
+      <div class="image-uploader" data-empty="Drop image here or click">
+        <input type="file" accept="image/*" class="file-input" />
+        <img class="preview hidden" alt="" />
+        <div class="image-actions">
+          <button class="btn small replace">Replace</button>
+          <button class="btn small danger remove">Remove</button>
+        </div>
+      </div>
+      <div class="card-actions">
+        <button class="btn small danger delete">🗑 Delete</button>
+      </div>
+    </div>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
