@@ -1,0 +1,16 @@
+{
+  "name": "flashcard-app",
+  "version": "1.0.0",
+  "description": "A modern flashcard application with image support",
+  "main": "app.js",
+  "scripts": {
+    "dev": "http-server . -p 3000 -o",
+    "start": "http-server . -p 3000"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  },
+  "keywords": ["flashcards", "study", "education"],
+  "author": "",
+  "license": "MIT"
+}
